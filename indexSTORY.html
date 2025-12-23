@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cake Story — Choose Your Path</title>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f4; margin: 20px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 8px; }
+    .subtitle { text-align:center; margin-top:0; color:#444; }
+
+    .scene {
+      display: none;
+      background: white;
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 16px;
+    }
+
+    /* Default scene shows when you first open the page */
+    #start { display: block; }
+
+    /* When you click a link like #forget, show that section */
+    .scene:target { display: block; }
+
+    /* If any scene is targeted, hide the start scene */
+    .scene:target ~ #start { display: none; }
+
+    img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd; }
+    .caption { font-weight: bold; margin: 12px 0 8px; }
+    .choices a {
+      display: inline-block;
+      margin: 6px 8px 0 0;
+      padding: 10px 12px;
+      background: #1f6feb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .choices a:hover { opacity: 0.9; }
+
+    .back a {
+      display:inline-block;
+      margin-top: 12px;
+      color:#1f6feb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Cake Story</h1>
+    <p class="subtitle">Choose what happens next.</p>
+
+    <!-- SCENE: BAKE CAKE -->
+    <section id="bake" class="scene">
+      <img src="images/bake_cake.jpg" alt="You bake a cake" />
+      <p class="caption">You bake a cake.</p>
+      <div class="choices">
+        <a href="#forget">Forget the cake</a>
+        <a href="#remember">Remember the cake</a>
+      </div>
+      <div class="back"><a href="#start">Back to start</a></div>
+    </section>
+
+    <!-- SCENE: FORGET CAKE (BRANCH POINT) -->
+    <section id="forget" class="scene">
+      <img src="images/forget_cake.jpg" alt="You forget the cake" />
+      <p class="caption">You forget the cake.</p>
+      <div class="choices">
+        <a href="#overheat">Keep forgetting (oven overheats)</a>
+        <a href="#remember">Remember the cake (in time)</a>
+        <a href="#rememberLate">Remember the cake late</a>
+      </div>
+      <div class="back"><a href="#bake">Back</a></div>
+    </section>
+
+    <!-- PATH A: KEEP FORGETTING -->
+    <section id="overheat" class="scene">
+      <img src="images/oven_overheats.jpg" alt="The oven overheats" />
+      <p class="caption">The oven overheats.</p>
+      <div class="choices">
+        <a href="#fire">House on fire</a>
+      </div>
+      <div class="back"><a href="#forget">Back</a></div>
+    </section>
+
+    <section id="fire" class="scene">
+      <img src="images/house_on_fire.jpg" alt="The house is on fire" />
+      <p class="caption">The house is on fire.</p>
+      <div class="choices">
+        <a href="#noCake1">No cake</a>
+      </div>
+      <div class="back"><a href="#overheat">Back</a></div>
+    </section>
+
+    <section id="noCake1" class="scene">
+      <img src="images/no_cake.jpg" alt="No cake" />
+      <p class="caption">No cake.</p>
+      <div class="choices">
+        <a href="#bake">Try again (bake a cake)</a>
+      </div>
+      <div class="back"><a href="#forget">Back</a></div>
+    </section>
+
+    <!-- PATH B: REMEMBER IN TIME -->
+    <section id="remember" class="scene">
+      <img src="images/remember_cake.jpg" alt="You remember the cake" />
+      <p class="caption">You remember the cake (in time).</p>
+      <div class="choices">
+        <a href="#turnOff">Turn oven off</a>
+      </div>
+      <div class="back"><a href="#forget">Back</a></div>
+    </section>
+
+    <section id="turnOff" class="scene">
+      <img src="images/turn_oven_off.jpg" alt="You turn the oven off" />
+      <p class="caption">You turn the oven off.</p>
+      <div class="choices">
+        <a href="#haveCake">Have a cake</a>
+      </div>
+      <div class="back"><a href="#remember">Back</a></div>
+    </section>
+
+    <section id="haveCake" class="scene">
+      <img src="images/have_cake.jpg" alt="You have a cake" />
+      <p class="caption">You have a cake!</p>
+      <div class="choices">
+        <a href="#bake">Play again</a>
+      </div>
+      <div class="back"><a href="#remember">Back</a></div>
+    </section>
+
+    <!-- PATH C: REMEMBER LATE -->
+    <section id="rememberLate" class="scene">
+      <img src="images/remember_cake_late.jpg" alt="You remember the cake late" />
+      <p class="caption">You remember the cake late.</p>
+      <div class="choices">
+        <a href="#burns">The cake burns</a>
+      </div>
+      <div class="back"><a href="#forget">Back</a></div>
+    </section>
+
+    <section id="burns" class="scene">
+      <img src="images/cake_burns.jpg" alt="The cake burns" />
+      <p class="caption">The cake burns.</p>
+      <div class="choices">
+        <a href="#noCake2">No cake</a>
+      </div>
+      <div class="back"><a href="#rememberLate">Back</a></div>
+    </section>
+
+    <section id="noCake2" class="scene">
+      <img src="images/no_cake_again.jpg" alt="No cake again" />
+      <p class="caption">No cake.</p>
+      <div class="choices">
+        <a href="#bake">Try again (bake a cake)</a>
+      </div>
+      <div class="back"><a href="#rememberLate">Back</a></div>
+    </section>
+
+    <!-- DEFAULT START (shows first) -->
+    <section id="start" class="scene">
+      <p class="caption">Start here:</p>
+      <div class="choices">
+        <a href="#bake">Bake a cake</a>
+      </div>
+      <p style="margin-top:10px;color:#444;">
+        Tip: Put your images in an <b>images</b> folder and match the filenames in the code.
+      </p>
+    </section>
+
+  </div>
+</body>
+</html>
